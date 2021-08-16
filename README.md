@@ -1,1 +1,1 @@
-# hanoi-towers_pygame
+# hanoi_towers-pygame
