@@ -62,4 +62,3 @@ while playing:
 
     move_block(towers)
     draw_game(towers)
-    
