@@ -23,17 +23,17 @@ def check_win(towers):
     return False
 
 
-def draw_game(towers):
-    #TODO implement printing an active piece
+def draw_game(towers, active='', tower=0):
     print('')
     for i in range(1,4):
-        print(i, ': ', towers[i])
+        print(i, ': ', towers[i], ' ', (active if tower == i else ''))
 
 
 def move_block(towers):
     i = get_input()
     if len(towers[i]) > 0:
         active = towers[i].pop()
+        draw_game(towers, active, i)
 
         j = get_input()
         if len(towers[j]) > 0:
