@@ -1,10 +1,18 @@
 import getch
+from os import system
+
+
+def cls():
+    try:
+        system('clear')
+    except:
+        system('cls')
 
 
 def get_input(for_init=False):
     #TODO prevent bad input (alphabet) and over 3
-    input = int(getch.getch())
-    return input
+    input = getch.getch()
+    return int(input)
 
 
 def init_game():
@@ -24,7 +32,7 @@ def check_win(towers):
 
 
 def draw_game(towers, active='', tower=0):
-    print('')
+    cls()
     for i in range(1,4):
         print(i, ': ', towers[i], ' ', (active if tower == i else ''))
 
@@ -47,6 +55,7 @@ def move_block(towers):
     return None
         
 
+cls()
 first, second, third = init_game()
 playing = True
 towers = {1:first, 2:second, 3:third}
