@@ -9,14 +9,23 @@ def cls():
         system('cls')
 
 
-def get_input(for_init=False):
+def get_input_start():
     input = getch.getch()
+    while not input.isdigit():
+        input = getch.getch()
+    return int(input)
+
+
+def get_input():
+    input = getch.getch()
+    while not input.isdigit() or input not in (b'1', b'2', b'3'):
+        input = getch.getch()
     return int(input)
 
 
 def init_game():
     print("Enter number of blocks to play with: ")
-    n = get_input()
+    n = get_input_start()
 
     first = [i for i in range(n,0,-1)]
     second = []
