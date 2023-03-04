@@ -13,3 +13,4 @@ A tiny graphical implementation of hanoi towers on pygame!
 7. Make number of blocks in the game variable. 
 8. When playing with 9 or more blocks they are to thick to fit the tower. Also they are to narrow to be seen on the tower. Fix adaptivity.
 9. Add animations!
+10. im learning git, muther fuck
