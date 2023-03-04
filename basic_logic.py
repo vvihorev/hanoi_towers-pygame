@@ -10,7 +10,6 @@ def cls():
 
 
 def get_input(for_init=False):
-    #TODO prevent bad input (alphabet) and over 3
     input = getch.getch()
     return int(input)
 

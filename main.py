@@ -89,11 +89,6 @@ class GameBoard:
         body_width = (BASE_WIDTH - BODY_HEIGHT) // self.blocks_number
         self.towers[0].blocks = [Block(i, body_width * i, self.towers[0]) for i in range(self.blocks_number, 0, -1)]
 
-    def check_win(self):
-        if self.towers[2] == self.blocks_number:
-            return True
-        return False
-
     def draw(self):
         for tower in self.towers:
             tower.draw()
