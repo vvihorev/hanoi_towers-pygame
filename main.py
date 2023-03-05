@@ -25,15 +25,29 @@ COLUMN_X = (DISPLAY_HEIGHT - BODY_HEIGHT) // 2
 COLUMN_Y = 2 * BODY_HEIGHT
 COLUMN_HEIGHT = DISPLAY_HEIGHT // 3 * 2
 
+# Sprites
+RING_IMG = pygame.image.load('sprites/ring.png')
+POLE_IMG = pygame.image.load('sprites/pole.png')
+BASE_IMG = pygame.image.load('sprites/base.png')
+
 
 class Tower:
     def __init__(self, board, base_center_x):
         self.board = board
         self.blocks = []
-        self.base = pygame.Rect(0, BASE_Y, BASE_WIDTH, BODY_HEIGHT)
-        self.column = pygame.Rect(0, COLUMN_Y, BODY_HEIGHT, COLUMN_HEIGHT)
+
+        self.base_image = pygame.transform.scale(BASE_IMG, (BASE_WIDTH, BODY_HEIGHT))
+        self.base = self.base_image.get_rect()
+        self.column_image = pygame.transform.scale(POLE_IMG, (BODY_HEIGHT, COLUMN_HEIGHT))
+        self.column = self.base_image.get_rect()
+
+        self.base.left = 0
+        self.base.top = BASE_Y
+        self.column.left = 0
+        self.column.top = COLUMN_Y + BODY_HEIGHT
+
         self.base.centerx = base_center_x
-        self.column.centerx = base_center_x
+        self.column.centerx = base_center_x + (BASE_WIDTH - BODY_HEIGHT) // 2
 
     def put_block(self, block):
         top = self.take_block()
@@ -59,8 +73,8 @@ class Tower:
         return None
 
     def draw(self):
-        pygame.draw.rect(DISPLAYSURF, BLACK, self.base)
-        pygame.draw.rect(DISPLAYSURF, BLACK, self.column)
+        DISPLAYSURF.blit(self.column_image, self.column)
+        DISPLAYSURF.blit(self.base_image, self.base)
 
 
 class Block:
@@ -68,14 +82,17 @@ class Block:
         self.tower = tower
         self.width = width
         self.position = (self.tower.board.blocks_number - self.width)
-        self.body = pygame.Rect(0, 0, body_width, BODY_HEIGHT)
+
+        self.image = pygame.transform.scale(RING_IMG, (body_width, BODY_HEIGHT))
+        self.body = self.image.get_rect()
+
         self.body.centerx = self.tower.base.centerx
         self.body.bottom = BASE_Y - self.position * BODY_HEIGHT
 
     def draw(self):
         self.body.centerx = self.tower.base.centerx
         self.body.bottom = BASE_Y - self.position * BODY_HEIGHT
-        pygame.draw.rect(DISPLAYSURF, BLACK, self.body)
+        DISPLAYSURF.blit(self.image, self.body)
 
 
 class GameBoard:
